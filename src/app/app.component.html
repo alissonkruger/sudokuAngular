@@ -1,0 +1,68 @@
+
+<!-- Novo Jogo -->
+
+  <div class="container-fluid" class="bg-dark" style="padding-top: 15px; padding-bottom: 15px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <button class="btn btn-lg btn-block btn-outline-success lead" (click)="newGame('easy')">
+            Fácil
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-lg btn-block btn-outline-warning lead" (click)="newGame('medium')">
+            Médio
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-lg btn-block btn-outline-danger lead" (click)="newGame('hard')">
+            Difícil
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-lg btn-block btn-outline-light lead" (click)="newGame(0)">
+            Vazio
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- /Novo Jogo -->
+
+<!-- Jogo -->
+
+  <div class="container-fluid" style="padding-top: 15px;" *ngIf="places.length != 0">
+    <div class="container">
+      <div class="row border border-dark">
+        <div class="col-md-4 border border-dark" *ngFor="let place of printPlaces; let placeKey = index">
+          <div class="row">
+            <div class="col-md-4 border border-secondary lead" *ngFor="let unit of place; let unitKey = index" style="height: 60px; text-align: center;">
+              <label class="text-primary" *ngIf="unit != 0" style="font-size: 40px;">
+                {{unit}}
+              </label>
+              <div class="form-group" *ngIf="unit == 0" style="height: 100%; width: 100%;">
+                <input type="number" 
+                  class="form-control" 
+                  min="1" max="9" 
+                  [(ngModel)]="places[placeKey][unitKey]" 
+                  [class.text-danger]="rules(placeKey, unitKey)"
+                  style="border: 0; text-align: center; height: 100%; width: 100%; font-size: 40px;"
+                  (change)="finishHim()"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-success btn-lg btn-block lead" (click)="solution()" style="margin-top: 4px;">
+            Resposta
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- /Jogo -->
